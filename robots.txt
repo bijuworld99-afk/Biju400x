@@ -1,0 +1,6 @@
+# Robots.txt for Biju400x Local Business Web Development
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://biju400x.com/sitemap.xml

@@ -465,9 +465,12 @@ body {
    MOBILE DROPDOWN BUTTON & NAVIGATION PANEL
    ========================================================================== */
 
-/* Mobile Dropdown Trigger Button */
-.mobile-nav-toggle {
-  display: none;
+/* Mobile Dropdown Trigger Button (STRICTLY HIDDEN ON DESKTOP) */
+.mobile-nav-toggle,
+#mobile-menu-btn {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
   background: rgba(18, 27, 53, 0.85);
   border: 1px solid rgba(0, 229, 255, 0.35);
   border-radius: var(--radius-full);
@@ -2053,13 +2056,40 @@ input, select, textarea {
   font-size: 16px !important;
 }
 
+/* ==========================================================================
+   DESKTOP & TABLET VIEWPORT (>= 769px): STRICTLY HIDE MOBILE DROPDOWN ELEMENTS
+   ========================================================================== */
+@media (min-width: 769px) {
+  .desktop-nav {
+    display: block !important;
+    visibility: visible !important;
+  }
+  .mobile-nav-toggle,
+  #mobile-menu-btn,
+  .mobile-dropdown-panel,
+  .mobile-dropdown-backdrop {
+    display: none !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+    max-height: 0 !important;
+  }
+}
+
 /* 1. Large Tablets & Small Laptops (993px - 1199px) */
-@media (max-width: 1199px) {
+@media (max-width: 1199px) and (min-width: 769px) {
+  .site-header {
+    padding: 0.85rem 1.75rem;
+  }
   .nav-menu {
-    gap: 1.5rem;
+    gap: 1.15rem;
   }
   .nav-link {
-    font-size: 0.9rem;
+    font-size: 0.86rem;
+  }
+  #nav-cta-btn {
+    padding: 0.75rem 1.35rem;
+    font-size: 0.85rem;
   }
   .section {
     padding: 6.5rem 2rem;
@@ -2069,21 +2099,35 @@ input, select, textarea {
   }
 }
 
-/* 2. Tablet Portrait & Medium Screens (768px - 992px) */
-@media (max-width: 992px) {
+/* 2. Tablet Portrait & Medium Screens (769px - 992px) */
+@media (max-width: 992px) and (min-width: 769px) {
   .site-header {
-    padding: 0.95rem 1.5rem;
+    padding: 0.75rem 1.25rem;
+  }
+  .brand-logo {
+    font-size: 1.35rem;
   }
   .desktop-nav {
-    display: none !important;
+    display: block !important;
   }
-  .mobile-nav-toggle {
-    display: inline-flex !important;
+  .nav-menu {
+    gap: 0.7rem;
+  }
+  .nav-link {
+    font-size: 0.78rem;
+    padding: 0.2rem 0;
   }
   .audio-toggle-btn span:not(.sound-wave) {
     display: none;
   }
-
+  #nav-cta-btn {
+    padding: 0.65rem 1rem;
+    font-size: 0.8rem;
+  }
+  .mobile-nav-toggle,
+  #mobile-menu-btn {
+    display: none !important;
+  }
   .section {
     padding: 5.5rem 1.75rem;
     min-height: auto;
@@ -2120,8 +2164,23 @@ input, select, textarea {
   }
 }
 
-/* 3. Mobile Phones (<= 768px) */
+/* 3. Mobile Phones (<= 768px ONLY) */
 @media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-nav-toggle,
+  #mobile-menu-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+  .mobile-dropdown-panel {
+    display: block !important;
+  }
+  .mobile-dropdown-backdrop {
+    display: block !important;
+  }
   .site-header {
     padding: 0.85rem 1.15rem;
   }
@@ -2130,6 +2189,9 @@ input, select, textarea {
   }
   .nav-actions {
     gap: 0.6rem;
+  }
+  .audio-toggle-btn span:not(.sound-wave) {
+    display: none;
   }
   .brand-logo {
     font-size: 1.35rem;

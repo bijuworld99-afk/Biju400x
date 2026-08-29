@@ -79,9 +79,9 @@ class BijuUIController {
       }
     });
 
-    // Close when resized back to desktop (> 992px)
+    // Close when resized back to desktop (> 768px)
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 992 && dropdownPanel.classList.contains('open')) {
+      if (window.innerWidth > 768 && dropdownPanel.classList.contains('open')) {
         closeDropdown();
       }
     });

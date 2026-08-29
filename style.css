@@ -91,8 +91,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 0;
   pointer-events: none; /* Mouse handled via window events */
   overflow: hidden;
@@ -109,8 +109,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   pointer-events: none;
   background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(11, 16, 32, 0.85) 90%, #0B1020 100%);
@@ -120,8 +120,8 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 1;
   pointer-events: none;
   background-image: 
@@ -2164,8 +2164,9 @@ input, select, textarea {
   }
 }
 
-/* 3. Mobile Phones (<= 768px ONLY) */
+/* 3. Mobile Phones (<= 768px ONLY) - COMPLETE MOBILE OPTIMIZATION */
 @media (max-width: 768px) {
+  /* Layout & Navigation */
   .desktop-nav {
     display: none !important;
   }
@@ -2182,19 +2183,19 @@ input, select, textarea {
     display: block !important;
   }
   .site-header {
-    padding: 0.85rem 1.15rem;
+    padding: 0.8rem 1.15rem;
   }
   #nav-cta-btn {
     display: none !important;
   }
   .nav-actions {
-    gap: 0.6rem;
+    gap: 0.55rem;
   }
   .audio-toggle-btn span:not(.sound-wave) {
     display: none;
   }
   .brand-logo {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
   }
   .brand-badge {
     width: 28px;
@@ -2202,197 +2203,426 @@ input, select, textarea {
     font-size: 0.8rem;
   }
 
+  /* Global Section & Heading Spacing */
   .section {
-    padding: 4.5rem 1.25rem;
+    padding: 4rem 1.15rem;
+    min-height: auto;
+  }
+  .section-tag {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.85rem;
+    margin-bottom: 0.9rem;
+  }
+  .section-title {
+    font-size: clamp(1.65rem, 6.5vw, 2.2rem) !important;
+    line-height: 1.22;
+    margin-bottom: 0.9rem;
+    letter-spacing: -0.01em;
+  }
+  .section-subtitle {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: 2rem;
   }
 
   /* Hero Section Mobile */
+  #hero {
+    padding-top: 5.8rem;
+    padding-bottom: 3.5rem;
+    min-height: auto;
+  }
+  .hero-content {
+    width: 100%;
+  }
+  .hero-badge-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.55rem;
+    width: 100%;
+    margin-bottom: 1.4rem;
+  }
+  .hero-status-pill {
+    width: 100%;
+    font-size: 0.76rem;
+    padding: 0.45rem 0.85rem;
+    line-height: 1.35;
+    white-space: normal;
+  }
   .hero-headline {
-    font-size: clamp(1.75rem, 6.2vw, 2.3rem);
-    line-height: 1.2;
-    margin-bottom: 1.1rem;
+    font-size: clamp(1.8rem, 6.8vw, 2.4rem);
+    line-height: 1.18;
+    margin-bottom: 1rem;
   }
   .hero-subheadline {
-    font-size: 1rem;
+    font-size: 0.95rem;
     line-height: 1.55;
     margin-bottom: 2rem;
   }
   .hero-cta-group {
     flex-direction: column;
     width: 100%;
-    gap: 1rem;
+    gap: 0.85rem;
     margin-bottom: 2.5rem;
   }
   .hero-cta-group .btn {
     width: 100%;
-    padding: 1rem 1.5rem;
-    font-size: 0.95rem;
+    padding: 0.95rem 1.5rem;
+    font-size: 0.92rem;
+    justify-content: center;
   }
   .hero-telemetry-row {
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
+    gap: 0.65rem;
     padding-top: 1.5rem;
+    max-width: 100%;
   }
   .telemetry-val {
     font-size: 1.25rem;
   }
   .telemetry-label {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
+    line-height: 1.2;
+    word-break: break-word;
   }
   .hero-scroll-indicator {
     display: none;
   }
 
   /* 5-Stage Blueprint Mobile */
+  .process-timeline {
+    margin-top: 1rem;
+  }
   .timeline-spine-line, .timeline-spine-progress {
     left: 14px;
   }
   .process-step-item {
-    padding-left: 2.8rem !important;
-    margin-bottom: 2.5rem;
+    width: 100% !important;
+    left: 0 !important;
+    text-align: left !important;
+    padding-left: 2.6rem !important;
+    padding-right: 0 !important;
+    margin-bottom: 2rem;
   }
   .process-step-item:nth-child(odd) .timeline-node-pin,
   .process-step-item:nth-child(even) .timeline-node-pin {
     left: 4px;
+    right: auto;
     width: 18px;
     height: 18px;
+    top: 1.2rem;
   }
   .step-card-box {
-    padding: 1.5rem 1.25rem;
+    padding: 1.35rem 1.15rem;
   }
   .step-card-box .card-title {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
+  }
+  .step-card-box .card-desc {
+    font-size: 0.88rem;
   }
 
   /* Customer Journey Strip Mobile */
   .customer-journey-strip {
+    flex-direction: column;
+    align-items: stretch;
     padding: 1.2rem 1rem;
-    gap: 0.6rem;
-    margin: 2rem 0;
+    gap: 0.65rem;
+    margin: 1.8rem 0;
   }
   .journey-step {
-    padding: 0.5rem 0.85rem;
+    width: 100%;
+    justify-content: center;
+    padding: 0.55rem 1rem;
     font-size: 0.85rem;
   }
   .journey-arrow {
-    font-size: 0.8rem;
+    display: none;
   }
 
-  /* Digital Presence 10 Pillars Mobile */
-  .presence-grid {
+  /* Problem vs Solution Contrast Grid */
+  .problem-solution-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+  }
+  .contrast-card {
+    padding: 1.6rem 1.2rem;
+    border-radius: var(--radius-lg);
+  }
+  .contrast-badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+  }
+  .contrast-card .card-title {
+    font-size: 1.15rem;
+  }
+  .contrast-list {
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .contrast-list li {
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  /* Benefits Grid Mobile */
+  .about-grid {
     grid-template-columns: 1fr;
     gap: 1.2rem;
   }
-  .presence-card {
-    padding: 1.6rem 1.4rem;
+  .cyber-card {
+    padding: 1.6rem 1.3rem;
     min-height: auto;
   }
+  .cyber-card .card-title {
+    font-size: 1.2rem;
+  }
+  .cyber-card .card-desc {
+    font-size: 0.9rem;
+  }
+  .card-icon-halo {
+    width: 50px;
+    height: 50px;
+    font-size: 1.35rem;
+    margin-bottom: 1.2rem;
+  }
+
+  /* Services Carousel Mobile */
+  .services-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .services-grid {
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+  }
+  .services-grid .hologram-service-card {
+    flex: 0 0 84vw;
+    max-width: 320px;
+    min-height: auto;
+    padding: 1.6rem 1.3rem;
+  }
+  .hologram-service-card .card-title {
+    font-size: 1.15rem;
+    min-height: auto;
+  }
+  .hologram-service-card .card-desc {
+    font-size: 0.88rem;
+    min-height: auto;
+  }
+
+  /* Digital Presence 10 Pillars Mobile */
+  .presence-main-title {
+    font-size: clamp(1.4rem, 5.5vw, 1.85rem) !important;
+  }
+  .presence-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1.8rem;
+  }
+  .presence-card {
+    padding: 1.5rem 1.25rem;
+    min-height: auto;
+  }
+  .presence-title {
+    font-size: 1.1rem;
+  }
+  .presence-desc {
+    font-size: 0.88rem;
+  }
   .presence-cta-banner {
-    padding: 1.6rem 1.25rem;
+    margin-top: 2rem;
+    padding: 1.5rem 1.2rem;
     flex-direction: column;
     text-align: center;
-    gap: 1.25rem;
+    gap: 1.2rem;
+    border-radius: var(--radius-lg);
+  }
+  .presence-cta-lead {
+    font-size: 1.05rem;
+    line-height: 1.45;
   }
   .presence-cta-banner .btn {
     width: 100%;
+    padding: 0.95rem 1.5rem;
+    font-size: 0.9rem;
+    justify-content: center;
   }
 
   /* Target Industries Mobile */
   .target-industries-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
+    gap: 0.65rem;
+    margin-top: 1.8rem;
   }
   .industry-chip-card {
-    padding: 0.85rem 1rem;
-    gap: 0.6rem;
+    padding: 0.75rem 0.85rem;
+    gap: 0.5rem;
   }
   .industry-name {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    line-height: 1.3;
   }
   .industry-emoji-icon {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 
-  /* Dashboards & Testimonials Mobile */
-  .case-studies-container {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  .case-dashboard-card {
-    padding: 1.6rem 1.25rem;
-  }
+  /* Testimonials Mobile */
   .testimonials-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
   .testimonial-card-3d {
-    padding: 1.8rem 1.4rem;
+    padding: 1.6rem 1.3rem;
+  }
+  .testimonial-quote {
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin-bottom: 1.5rem;
   }
 
-  /* Contact Form Mobile */
+  /* Tech Stack Display Mobile */
+  .tech-grid-display {
+    gap: 0.65rem;
+    margin-top: 1.8rem;
+  }
+  .tech-pill-badge {
+    padding: 0.65rem 1rem;
+    font-size: 0.82rem;
+    gap: 0.55rem;
+  }
+  .tech-pill-badge i {
+    font-size: 1.1rem;
+  }
+
+  /* Contact Section & Form Mobile */
+  .contact-section-wrap {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .contact-info-col {
+    gap: 1.25rem;
+  }
   .form-grid-2 {
     grid-template-columns: 1fr;
-    gap: 1.2rem;
+    gap: 1.1rem;
+    margin-bottom: 1.1rem;
+  }
+  .form-group {
+    margin-bottom: 1.1rem;
   }
   .contact-form-glass {
-    padding: 1.75rem 1.25rem;
+    padding: 1.75rem 1.2rem;
+    border-radius: var(--radius-lg);
   }
-  .contact-card-box {
-    padding: 1.4rem;
+  .form-input, .form-select, .form-textarea {
+    padding: 0.85rem 1rem;
+    font-size: 16px !important; /* Prevents auto-zoom on iOS */
+  }
+  #form-submit-btn {
+    min-height: 50px;
+    font-size: 0.92rem;
+    padding: 0.95rem 1.2rem;
   }
 
   /* Footer Mobile */
+  .site-footer {
+    padding: 3rem 1.15rem 2rem;
+  }
   .footer-top {
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.25rem;
     text-align: center;
+    padding-bottom: 1.8rem;
   }
   .footer-bottom {
     flex-direction: column;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1rem;
     text-align: center;
+    font-size: 0.8rem;
   }
   .back-to-top-btn {
     width: 100%;
     justify-content: center;
+    padding: 0.7rem 1.2rem;
+  }
+
+  /* Floating WhatsApp Orb Mobile */
+  .floating-whatsapp-widget {
+    bottom: 1rem;
+    right: 1rem;
+    padding: 0.35rem;
+  }
+  .whatsapp-orb-icon {
+    width: 46px;
+    height: 46px;
+    font-size: 1.45rem;
+  }
+  .whatsapp-widget-text {
+    display: none;
   }
 }
 
-/* 4. Ultra-Small Devices (<= 480px) */
+/* 4. Small Devices (<= 480px) */
 @media (max-width: 480px) {
+  .section {
+    padding: 3.5rem 1rem;
+  }
+  .hero-telemetry-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-top: 1.2rem;
+  }
+  .telemetry-item {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.4rem 0.6rem;
+    background: rgba(18, 27, 53, 0.4);
+    border-radius: var(--radius-sm);
+  }
+  .telemetry-val {
+    font-size: 1.2rem;
+  }
   .mobile-nav-grid {
     grid-template-columns: 1fr;
     gap: 0.5rem;
   }
   .mobile-dropdown-content {
-    padding: 1.1rem 1rem 1.6rem;
+    padding: 1.1rem 0.9rem 1.6rem;
   }
 }
 
-/* 5. Ultra-Small Devices (<= 420px, e.g. iPhone SE, Fold) */
-@media (max-width: 420px) {
-  .section {
-    padding: 3.8rem 0.85rem;
+/* 5. Ultra-Small Devices (<= 380px, e.g. iPhone SE, Galaxy Fold) */
+@media (max-width: 380px) {
+  .site-header {
+    padding: 0.75rem 0.85rem;
   }
-  .hero-telemetry-row {
-    grid-template-columns: 1fr;
-    gap: 1rem;
+  .brand-logo {
+    font-size: 1.2rem;
+  }
+  .brand-badge {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+  .mobile-nav-toggle {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.72rem;
+    gap: 0.4rem;
   }
   .target-industries-grid {
     grid-template-columns: 1fr;
   }
-  .journey-arrow {
-    display: none;
+  .industry-chip-card {
+    padding: 0.65rem 0.8rem;
   }
-  .customer-journey-strip {
-    flex-direction: column;
-    width: 100%;
-  }
-  .journey-step {
-    width: 100%;
-    justify-content: center;
+  .contact-form-glass {
+    padding: 1.4rem 0.95rem;
   }
 }
 

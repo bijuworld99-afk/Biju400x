@@ -24,31 +24,67 @@ class BijuUIController {
      1. Mobile Navigation Toggle
      ------------------------------------------------------------- */
   initMobileNav() {
-    const toggleBtn = document.querySelector('.mobile-nav-toggle');
-    const navMenu = document.querySelector('.nav-menu');
+    const toggleBtn = document.getElementById('mobile-menu-btn') || document.querySelector('.mobile-nav-toggle');
+    const dropdownPanel = document.getElementById('mobile-dropdown-panel');
+    const backdrop = document.getElementById('mobile-dropdown-backdrop');
+    const navLinks = document.querySelectorAll('.mobile-dropdown-item, .mobile-dropdown-cta, .mobile-dropdown-phone, .nav-link');
 
-    if (toggleBtn && navMenu) {
-      toggleBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('open');
-        const icon = toggleBtn.querySelector('i');
-        if (icon) {
-          icon.classList.toggle('fa-bars');
-          icon.classList.toggle('fa-xmark');
-        }
-      });
+    if (!toggleBtn || !dropdownPanel) return;
 
-      // Auto-close menu when any nav link is tapped
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('open');
-          const icon = toggleBtn.querySelector('i');
-          if (icon) {
-            icon.classList.remove('fa-xmark');
-            icon.classList.add('fa-bars');
-          }
-        });
+    const openDropdown = () => {
+      toggleBtn.classList.add('active');
+      toggleBtn.setAttribute('aria-expanded', 'true');
+      dropdownPanel.classList.add('open');
+      if (backdrop) backdrop.classList.add('open');
+      document.body.classList.add('mobile-nav-locked');
+    };
+
+    const closeDropdown = () => {
+      toggleBtn.classList.remove('active');
+      toggleBtn.setAttribute('aria-expanded', 'false');
+      dropdownPanel.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('open');
+      document.body.classList.remove('mobile-nav-locked');
+    };
+
+    // Toggle button click
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdownPanel.classList.contains('open');
+      if (isOpen) {
+        closeDropdown();
+      } else {
+        openDropdown();
+      }
+    });
+
+    // Close on backdrop tap
+    if (backdrop) {
+      backdrop.addEventListener('click', () => {
+        closeDropdown();
       });
     }
+
+    // Auto-close when any nav link is clicked
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        closeDropdown();
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && dropdownPanel.classList.contains('open')) {
+        closeDropdown();
+      }
+    });
+
+    // Close when resized back to desktop (> 992px)
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 992 && dropdownPanel.classList.contains('open')) {
+        closeDropdown();
+      }
+    });
   }
 
   /* -------------------------------------------------------------

@@ -14,7 +14,6 @@ class BijuUIController {
   }
 
   init() {
-    this.initMobileNav();
     this.initAudioSynthesizer();
     this.initContactForm();
     this.initServicesCarousel();
@@ -22,74 +21,7 @@ class BijuUIController {
   }
 
   /* -------------------------------------------------------------
-     1. Mobile Navigation Toggle
-     ------------------------------------------------------------- */
-  initMobileNav() {
-    const toggleBtn = document.getElementById('mobile-menu-btn') || document.querySelector('.mobile-nav-toggle');
-    const dropdownPanel = document.getElementById('mobile-dropdown-panel');
-    const backdrop = document.getElementById('mobile-dropdown-backdrop');
-    const navLinks = document.querySelectorAll('.mobile-dropdown-item, .mobile-dropdown-cta, .mobile-dropdown-phone, .nav-link');
-
-    if (!toggleBtn || !dropdownPanel) return;
-
-    const openDropdown = () => {
-      toggleBtn.classList.add('active');
-      toggleBtn.setAttribute('aria-expanded', 'true');
-      dropdownPanel.classList.add('open');
-      if (backdrop) backdrop.classList.add('open');
-      document.body.classList.add('mobile-nav-locked');
-    };
-
-    const closeDropdown = () => {
-      toggleBtn.classList.remove('active');
-      toggleBtn.setAttribute('aria-expanded', 'false');
-      dropdownPanel.classList.remove('open');
-      if (backdrop) backdrop.classList.remove('open');
-      document.body.classList.remove('mobile-nav-locked');
-    };
-
-    // Toggle button click
-    toggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isOpen = dropdownPanel.classList.contains('open');
-      if (isOpen) {
-        closeDropdown();
-      } else {
-        openDropdown();
-      }
-    });
-
-    // Close on backdrop tap
-    if (backdrop) {
-      backdrop.addEventListener('click', () => {
-        closeDropdown();
-      });
-    }
-
-    // Auto-close when any nav link is clicked
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        closeDropdown();
-      });
-    });
-
-    // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && dropdownPanel.classList.contains('open')) {
-        closeDropdown();
-      }
-    });
-
-    // Close when resized back to desktop (> 1024px)
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 1024 && dropdownPanel.classList.contains('open')) {
-        closeDropdown();
-      }
-    });
-  }
-
-  /* -------------------------------------------------------------
-     1b. Services Single-Line Track Carousel Controls
+     1. Services Single-Line Track Carousel Controls
      ------------------------------------------------------------- */
   initServicesCarousel() {
     const track = document.getElementById('services-track');

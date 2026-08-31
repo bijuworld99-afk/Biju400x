@@ -81,22 +81,6 @@ class BijuScrollController {
             } else {
               target.scrollIntoView({ behavior: 'smooth' });
             }
-
-            // Close mobile dropdown menu if open
-            const mobilePanel = document.getElementById('mobile-dropdown-panel');
-            const mobileToggle = document.getElementById('mobile-menu-btn');
-            const mobileBackdrop = document.getElementById('mobile-dropdown-backdrop');
-            if (mobilePanel && mobilePanel.classList.contains('open')) {
-              mobilePanel.classList.remove('open');
-            }
-            if (mobileToggle) {
-              mobileToggle.classList.remove('active');
-              mobileToggle.setAttribute('aria-expanded', 'false');
-            }
-            if (mobileBackdrop) {
-              mobileBackdrop.classList.remove('open');
-            }
-            document.body.classList.remove('mobile-nav-locked');
           }
         }
       });

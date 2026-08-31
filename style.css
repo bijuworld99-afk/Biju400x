@@ -365,13 +365,19 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-  color: #fff;
-  font-size: 0.9rem;
-  box-shadow: 0 0 15px rgba(79, 140, 255, 0.4);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(0, 229, 255, 0.45);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.45), 0 0 8px rgba(168, 85, 247, 0.35);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.brand-logo:hover .brand-badge {
+  transform: scale(1.1) rotate(4deg);
+  box-shadow: 0 0 24px rgba(0, 229, 255, 0.75), 0 0 14px rgba(168, 85, 247, 0.55);
+  border-color: rgba(0, 229, 255, 0.85);
 }
 
 .brand-logo .logo-accent {

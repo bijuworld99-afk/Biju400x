@@ -2797,9 +2797,9 @@ input, select, textarea {
 }
 
 .pricing-tab-panel.active {
-  display: block;
-  opacity: 1;
-  transform: translateY(0);
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 /* Pricing Grid */

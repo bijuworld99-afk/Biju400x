@@ -45,25 +45,26 @@ class BijuUIController {
     const tabBtns = document.querySelectorAll('.pricing-tab-btn');
     const panels = document.querySelectorAll('.pricing-tab-panel');
 
-    if (!tabBtns.length) return;
+    const switchTab = (targetId) => {
+      if (!targetId) return;
+      tabBtns.forEach(b => {
+        const matches = b.getAttribute('data-target') === targetId;
+        b.classList.toggle('active', matches);
+        b.setAttribute('aria-selected', matches ? 'true' : 'false');
+      });
+
+      panels.forEach(p => {
+        p.classList.toggle('active', p.id === targetId);
+      });
+    };
+
+    window.switchPricingTab = switchTab;
 
     tabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
         const targetId = btn.getAttribute('data-target');
-        
-        tabBtns.forEach(b => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        panels.forEach(p => p.classList.remove('active'));
-
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-
-        const targetPanel = document.getElementById(targetId);
-        if (targetPanel) {
-          targetPanel.classList.add('active');
-        }
+        switchTab(targetId);
       });
     });
 
@@ -73,36 +74,45 @@ class BijuUIController {
     const careNotes = document.querySelectorAll('.care-billing-note');
     const careActionBtns = document.querySelectorAll('.care-action-btn');
 
+    const switchBilling = (mode) => {
+      if (!mode) return;
+      billingBtns.forEach(b => {
+        b.classList.toggle('active', b.getAttribute('data-billing') === mode);
+      });
+
+      careAmounts.forEach(amt => {
+        const val = amt.getAttribute(`data-${mode}`);
+        if (val) {
+          amt.style.opacity = '0';
+          setTimeout(() => {
+            amt.textContent = val;
+            amt.style.opacity = '1';
+          }, 150);
+        }
+      });
+
+      careNotes.forEach(note => {
+        const text = note.getAttribute(`data-${mode}`);
+        if (text) {
+          note.textContent = text;
+        }
+      });
+
+      careActionBtns.forEach(actionBtn => {
+        const link = actionBtn.getAttribute(`data-${mode}-link`);
+        if (link) {
+          actionBtn.setAttribute('href', link);
+        }
+      });
+    };
+
+    window.switchCareBilling = switchBilling;
+
     billingBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const mode = btn.getAttribute('data-billing'); // 'monthly' or 'annual'
-        billingBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        careAmounts.forEach(amt => {
-          const val = amt.getAttribute(`data-${mode}`);
-          if (val) {
-            amt.style.opacity = '0';
-            setTimeout(() => {
-              amt.textContent = val;
-              amt.style.opacity = '1';
-            }, 150);
-          }
-        });
-
-        careNotes.forEach(note => {
-          const text = note.getAttribute(`data-${mode}`);
-          if (text) {
-            note.textContent = text;
-          }
-        });
-
-        careActionBtns.forEach(actionBtn => {
-          const link = actionBtn.getAttribute(`data-${mode}-link`);
-          if (link) {
-            actionBtn.setAttribute('href', link);
-          }
-        });
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const mode = btn.getAttribute('data-billing');
+        switchBilling(mode);
       });
     });
   }

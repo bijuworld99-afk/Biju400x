@@ -2719,7 +2719,37 @@ input, select, textarea {
    ========================================================================== */
 #pricing {
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 5;
+}
+
+#pricing .container {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#pricing .section-title,
+#pricing .section-tag,
+#pricing .section-subtitle {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+#pricing .pricing-cards-grid,
+#pricing .pricing-care-grid {
+  display: grid !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#pricing .pricing-card-3d,
+#pricing .pricing-custom-card {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 #pricing::before {

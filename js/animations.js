@@ -21,6 +21,9 @@ class BijuAnimations {
   initSectionReveals() {
     const sections = document.querySelectorAll('.section');
     sections.forEach(sec => {
+      // Never hide or suppress the pricing section
+      if (sec.id === 'pricing') return;
+
       // Titles and tags fade-up
       const title = sec.querySelector('.section-title');
       const tag = sec.querySelector('.section-tag');
@@ -40,7 +43,7 @@ class BijuAnimations {
 
       // Staggered grid cards
       const cards = sec.querySelectorAll(
-        '.cyber-card, .hologram-service-card, .hud-stat-cell, .process-step-item, .case-dashboard-card, .testimonial-card-3d, .tech-pill-badge, .pricing-card-3d, .pricing-care-card, .pricing-custom-card'
+        '.cyber-card, .hologram-service-card, .hud-stat-cell, .process-step-item, .case-dashboard-card, .testimonial-card-3d, .tech-pill-badge'
       );
       if (cards.length > 0) {
         window.gsap.from(cards, {

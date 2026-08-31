@@ -40,7 +40,7 @@ class BijuAnimations {
 
       // Staggered grid cards
       const cards = sec.querySelectorAll(
-        '.cyber-card, .hologram-service-card, .hud-stat-cell, .process-step-item, .case-dashboard-card, .testimonial-card-3d, .tech-pill-badge'
+        '.cyber-card, .hologram-service-card, .hud-stat-cell, .process-step-item, .case-dashboard-card, .testimonial-card-3d, .tech-pill-badge, .pricing-card-3d, .pricing-care-card, .pricing-custom-card'
       );
       if (cards.length > 0) {
         window.gsap.from(cards, {
@@ -125,7 +125,7 @@ class BijuAnimations {
   init3DCardTilts() {
     // Interactive 3D Perspective Tilt on Mouse Movement
     const cards = document.querySelectorAll(
-      '.cyber-card, .hologram-service-card, .case-dashboard-card, .testimonial-card-3d'
+      '.cyber-card, .hologram-service-card, .case-dashboard-card, .testimonial-card-3d, .pricing-card-3d, .pricing-care-card, .pricing-custom-card'
     );
 
     cards.forEach(card => {

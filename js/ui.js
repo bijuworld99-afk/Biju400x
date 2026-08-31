@@ -18,6 +18,7 @@ class BijuUIController {
     this.initAudioSynthesizer();
     this.initContactForm();
     this.initServicesCarousel();
+    this.initPricingTabs();
   }
 
   /* -------------------------------------------------------------
@@ -103,6 +104,75 @@ class BijuUIController {
         track.scrollBy({ left: 360, behavior: 'smooth' });
       });
     }
+  }
+
+  /* -------------------------------------------------------------
+     1c. Pricing Switcher Tabs (Website Packages vs Care & Maintenance)
+     ------------------------------------------------------------- */
+  initPricingTabs() {
+    const tabBtns = document.querySelectorAll('.pricing-tab-btn');
+    const panels = document.querySelectorAll('.pricing-tab-panel');
+
+    if (!tabBtns.length) return;
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        
+        tabBtns.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        panels.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const targetPanel = document.getElementById(targetId);
+        if (targetPanel) {
+          targetPanel.classList.add('active');
+        }
+      });
+    });
+
+    // Care Billing Frequency Toggle (Monthly vs Annual 20% Discount)
+    const billingBtns = document.querySelectorAll('.care-billing-btn');
+    const careAmounts = document.querySelectorAll('.care-amount');
+    const careNotes = document.querySelectorAll('.care-billing-note');
+    const careActionBtns = document.querySelectorAll('.care-action-btn');
+
+    billingBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.getAttribute('data-billing'); // 'monthly' or 'annual'
+        billingBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        careAmounts.forEach(amt => {
+          const val = amt.getAttribute(`data-${mode}`);
+          if (val) {
+            amt.style.opacity = '0';
+            setTimeout(() => {
+              amt.textContent = val;
+              amt.style.opacity = '1';
+            }, 150);
+          }
+        });
+
+        careNotes.forEach(note => {
+          const text = note.getAttribute(`data-${mode}`);
+          if (text) {
+            note.textContent = text;
+          }
+        });
+
+        careActionBtns.forEach(actionBtn => {
+          const link = actionBtn.getAttribute(`data-${mode}-link`);
+          if (link) {
+            actionBtn.setAttribute('href', link);
+          }
+        });
+      });
+    });
   }
 
   /* -------------------------------------------------------------
@@ -202,7 +272,7 @@ class BijuUIController {
   }
 
   /* -------------------------------------------------------------
-     3. WhatsApp Requirement Transmission System (+91 8371817773)
+     3. WhatsApp Requirement Transmission System (+91 9332600760)
      ------------------------------------------------------------- */
   initContactForm() {
     const form = document.getElementById('contact-growth-form');
@@ -229,7 +299,7 @@ class BijuUIController {
 
       // Display loading / connecting state
       feedbackBanner.className = 'form-feedback-banner loading';
-      feedbackBanner.innerHTML = '<i class="fa-brands fa-whatsapp fa-spin"></i> Initializing WhatsApp channel with +91 8371817773...';
+      feedbackBanner.innerHTML = '<i class="fa-brands fa-whatsapp fa-spin"></i> Initializing WhatsApp channel with +91 9332600760...';
       feedbackBanner.style.display = 'flex';
 
       submitBtn.disabled = true;
@@ -249,7 +319,7 @@ ${message}
 ----------------------------------------
 ⚡ _Sent via Biju400x Web Developer Desk_`;
 
-      const whatsappNumber = '918371817773';
+      const whatsappNumber = '919332600760';
       const waUrl = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(waText)}`;
 
       setTimeout(() => {
